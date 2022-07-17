@@ -1,0 +1,12 @@
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/ConsumerStartup.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/register/ConsumerRegister.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/entity/ConsumerMessageQueue.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/test/TopicAConsumer.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/config/ExecutorService.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/task/CommitOffsetTask.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/test/TopicBConsumer.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/entity/AbstractConsumer.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/task/PullMessageTask.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/manage/ConsumerManager.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/task/ConsumeMessageTask.java
+/Users/kelvinwang/stubhub/wlg-mq/mq-client/mq-consumer/src/main/java/com/wlg/mqconsumer/MessageConsumer.java

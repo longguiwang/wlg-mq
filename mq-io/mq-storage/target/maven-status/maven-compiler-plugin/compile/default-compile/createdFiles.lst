@@ -1,0 +1,7 @@
+com/wlg/mqstorage/data/QueueOffsetStorage.class
+com/wlg/mqstorage/persistence/FileOperation.class
+com/wlg/mqstorage/data/MessageFuseStorage.class
+com/wlg/mqstorage/fuse/MessageFuse.class
+com/wlg/mqstorage/fuse/TopicConsumerData.class
+com/wlg/mqstorage/config/StorageConfig.class
+com/wlg/mqstorage/data/MessageStorage.class
