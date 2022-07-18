@@ -59,17 +59,18 @@ public class FileOperation {
     }
 
 
-    public static List<MessageFuse> readMessageQueue(String fileName, long index) throws IOException {
+    public static List<MessageFuse> readMessageQueue(String fileName, long index, int size) throws IOException {
         List<MessageFuse> data = new ArrayList<>();
 
         RandomAccessFile rws = new RandomAccessFile(fileName, "rw");
         long offset = index * MessageFuseLength;
 
         FileChannel fileChannel = rws.getChannel();
+        int count = 0;
         while (true){
             ByteBuffer byteBuffer = ByteBuffer.allocate(MessageFuseLength);
             int read = fileChannel.read(byteBuffer, offset);
-            if (read<=0){
+            if (read<=0 || count >= size){
                 break;
             }
             byteBuffer.flip();
@@ -82,6 +83,7 @@ public class FileOperation {
             offset+= MessageFuseLength;
 
             data.add(messageFuse);
+            count++;
         }
         fileChannel.close();
         return data;
@@ -141,7 +143,6 @@ public class FileOperation {
                     PullMessage pullMessage = new PullMessage();
                     pullMessage.setMsgId(sendMessage.getMsgId());
                     pullMessage.setBody(sendMessage.getBody());
-                    pullMessage.setKey(sendMessage.getKey());
                     pullMessage.setTopic(sendMessage.getTopic());
                     pullMessage.setTag(sendMessage.getTag());
                     pullMessage.setIndex(durability.getIndex());

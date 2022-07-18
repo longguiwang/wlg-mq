@@ -8,4 +8,5 @@ package com.wlg.mqcommon.settings;
 public class Settings {
     public static final int DEFAULT_PORT = 9001;
     public static final int DEFAULT_MESSAGE_QUEUE_SIZE = 4;
+    public static final int DEFAULT_PULL_SIZE = 10;
 }

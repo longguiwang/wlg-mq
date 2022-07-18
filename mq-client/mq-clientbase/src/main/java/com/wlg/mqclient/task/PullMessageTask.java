@@ -2,6 +2,7 @@ package com.wlg.mqclient.task;
 
 import com.wlg.mqclient.entity.ConsumerMessageQueue;
 import com.wlg.mqclient.register.ConsumerRegister;
+import com.wlg.mqcommon.settings.Settings;
 import com.wlg.mqprotocol.entity.Head;
 import com.wlg.mqprotocol.entity.Pull;
 import com.wlg.mqprotocol.entity.PullMessage;
@@ -69,7 +70,7 @@ public class PullMessageTask implements Runnable{
         pull.setTopic(topic);
         pull.setQueueId(queueId);
         pull.setConsumerGroup(consumerGroup);
-        pull.setSize(10);
+        pull.setSize(Settings.DEFAULT_PULL_SIZE);
 
         if (lastMessageMap.get(queueId)==null){
             pull.setOffset(0);

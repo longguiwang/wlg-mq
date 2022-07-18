@@ -17,7 +17,6 @@ public class PullMessage implements Serializable {
     private String msgId;
     private String topic;
     private String tag;
-    private String key;
     private String body;
     private Long index;
 
@@ -27,7 +26,6 @@ public class PullMessage implements Serializable {
                 .add("msgId='" + msgId + "'")
                 .add("topic='" + topic + "'")
                 .add("tag='" + tag + "'")
-                .add("key='" + key + "'")
                 .add("body='" + body + "'")
                 .add("index=" + index)
                 .toString();

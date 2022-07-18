@@ -27,11 +27,11 @@ public class MessageFuseStorage {
         }
     }
 
-    public static List<MessageFuse>  readMessageQueue(Integer queueId, String topic, long index){
+    public static List<MessageFuse>  readMessageQueue(Integer queueId, String topic, long index, int size){
         String queueFileName = StorageConfig.MessagePath + topic +StorageConfig.Queue + "queue_"+ queueId;
         new File(StorageConfig.MessagePath + topic +StorageConfig.Queue ).mkdirs();
         try {
-            return FileOperation.readMessageQueue(queueFileName, index);
+            return FileOperation.readMessageQueue(queueFileName, index, size);
         } catch (IOException e) {
             e.printStackTrace();
         }

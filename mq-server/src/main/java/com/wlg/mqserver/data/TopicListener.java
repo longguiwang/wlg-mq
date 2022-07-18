@@ -34,7 +34,7 @@ public class TopicListener {
      * @return List<PullMessage>
      */
     public List<PullMessage> pullMessage(Pull pull){
-        List<MessageFuse> data = MessageFuseStorage.readMessageQueue(pull.getQueueId(), pull.getTopic(), pull.getOffset());
+        List<MessageFuse> data = MessageFuseStorage.readMessageQueue(pull.getQueueId(), pull.getTopic(), pull.getOffset(),pull.getSize());
         if (data.size()==0){
             return null;
         }
