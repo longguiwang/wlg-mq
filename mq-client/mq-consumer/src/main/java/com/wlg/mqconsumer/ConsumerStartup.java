@@ -1,6 +1,7 @@
 package com.wlg.mqconsumer;
 
 import com.wlg.mqclient.ClientReactor;
+import com.wlg.mqclient.consumer.MessageConsumer;
 import com.wlg.mqclient.entity.AbstractConsumer;
 import com.wlg.mqconsumer.test.TopicAConsumer;
 import com.wlg.mqconsumer.test.TopicBConsumer;

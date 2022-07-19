@@ -36,7 +36,7 @@ public class CommitOffsetTask implements Runnable{
     @Override
     public void run() {
         Map<Integer, Long> offSetMap = consumerMessageQueue.getOffSetMap();
-        log.info("consumerGroupL:{} ,offSetMap:{}",consumerMessageQueue.getConsumerGroup(),offSetMap);
+        log.info("consumerGroup:{} ,offSetMap:{},channelFuture is {}",consumerMessageQueue.getConsumerGroup(),offSetMap,this.channelFuture);
         while (true){
             //尚未初始化完成
             if (!ConsumerRegister.isInit(this.topic,this.consumerGroup)){
@@ -52,7 +52,7 @@ public class CommitOffsetTask implements Runnable{
                 syncIndex();
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //log.error(e.getLocalizedMessage());
             }
         }
 
@@ -72,7 +72,6 @@ public class CommitOffsetTask implements Runnable{
         hsReq.setData(syncOffsetMessage);
         hsReq.setOperation(OperationEnum.CommitOffset.getOperation());
         encodedData.setData(hsReq);
-
         channelFuture.channel().writeAndFlush(encodedData).sync();
     }
 }

@@ -29,4 +29,8 @@ public class ExecutorService {
         return threadPoolExecutor;
     }
 
+    public static void shutDownNow(){
+        threadPoolExecutor.shutdownNow();
+    }
+
 }

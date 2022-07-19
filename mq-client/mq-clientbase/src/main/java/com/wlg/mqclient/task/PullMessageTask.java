@@ -11,6 +11,7 @@ import com.wlg.mqprotocol.enums.MessageEnum;
 import com.wlg.mqprotocol.enums.OperationEnum;
 import com.wlg.mqprotocol.protocol.EncodedData;
 import io.netty.channel.ChannelFuture;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @Date: 7/16/22
  * @Description: PullMessageTask
  */
+@Slf4j
 public class PullMessageTask implements Runnable{
 
     private final ConsumerMessageQueue consumerMessageQueue;
@@ -36,6 +38,7 @@ public class PullMessageTask implements Runnable{
 
     @Override
     public void run() {
+        log.info("pull message from topic:{} ,consumer group is:{}, channelFuture is {}",this.topic,consumerMessageQueue.getConsumerGroup(),this.channelFuture);
         while (true){
             //尚未初始化完成
             if (!ConsumerRegister.isInit(this.topic,this.consumerGroup)){
@@ -52,7 +55,7 @@ public class PullMessageTask implements Runnable{
                     pull(queueId);
                     Thread.sleep(1L);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error(e.getLocalizedMessage());
                 }
             }
         }

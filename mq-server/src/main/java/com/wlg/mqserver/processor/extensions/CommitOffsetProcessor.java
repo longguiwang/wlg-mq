@@ -21,7 +21,7 @@ public class CommitOffsetProcessor extends BaseProcessor {
         if(request.getData() instanceof SyncOffsetMessage){
             SyncOffsetMessage syncOffsetMessage = (SyncOffsetMessage) request.getData();
             QueueOffsetStorage.saveConsumer(syncOffsetMessage.getTopic(),syncOffsetMessage.getConsumer(),syncOffsetMessage.getOffSetMap());
-            log.info("CommitOffsetExecutor sync offset:{}",syncOffsetMessage.getOffSetMap());
+            log.info("CommitOffsetProcessor sync offset:{}",syncOffsetMessage.getOffSetMap());
             Response<String> resp = new Response<>();
             resp.setData("OK");
             resp.setOperation(OperationEnum.CommitOffset.getOperation());

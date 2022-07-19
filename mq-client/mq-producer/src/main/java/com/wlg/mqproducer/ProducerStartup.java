@@ -2,6 +2,7 @@ package com.wlg.mqproducer;
 
 import com.wlg.mqclient.ClientReactor;
 import com.wlg.mqclient.entity.SendMessageResult;
+import com.wlg.mqclient.producer.MessageProducer;
 import com.wlg.mqprotocol.entity.SendMessage;
 import lombok.extern.slf4j.Slf4j;
 

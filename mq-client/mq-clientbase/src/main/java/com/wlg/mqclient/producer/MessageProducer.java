@@ -1,9 +1,8 @@
-package com.wlg.mqproducer;
+package com.wlg.mqclient.producer;
 
 import com.alibaba.fastjson.JSON;
 import com.wlg.mqclient.entity.SendMessageResult;
 import com.wlg.mqclient.handler.ClientHandler;
-import com.wlg.mqclient.processor.ClientProcessor;
 import com.wlg.mqprotocol.entity.Head;
 import com.wlg.mqprotocol.entity.Request;
 import com.wlg.mqprotocol.entity.SendMessage;
