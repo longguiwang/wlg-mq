@@ -47,16 +47,17 @@ public class ProducerStartup {
             sendMessage.setTopic("TopicB");
             sendMessage.setTag("tagB");
             sendMessage.setBody("Message---"+i);
-
-            SendMessageResult b = MessageProducer.sendMsg(sendMessage);
-
-            if (!Integer.valueOf(200).equals(b.getMessageResult())){
-                log.error("Message sent failed : "+b);
-            }else{
-                log.info("Message sent : "+b);
+            try{
+                SendMessageResult b = MessageProducer.sendMsg(sendMessage);
+                if (!Integer.valueOf(200).equals(b.getMessageResult())){
+                    log.error("Message sent failed : "+b);
+                }else{
+                    log.info("Message sent : "+b);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
-
-            Thread.sleep(100L);
+            Thread.sleep(5000L);
         }
 
         for (int i=0;i<100;i++){
@@ -64,16 +65,18 @@ public class ProducerStartup {
             sendMessage.setTopic("TopicA");
             sendMessage.setTag("tagA");
             sendMessage.setBody("Message---"+i);
+            try {
+                SendMessageResult a = MessageProducer.sendMsg(sendMessage);
 
-            SendMessageResult a = MessageProducer.sendMsg(sendMessage);
-
-            if (!Integer.valueOf(200).equals(a.getMessageResult())){
-                log.error("Message sent failed : "+a);
-            }else{
-                log.info("Message sent : "+a);
+                if (!Integer.valueOf(200).equals(a.getMessageResult())) {
+                    log.error("Message sent failed : " + a);
+                } else {
+                    log.info("Message sent : " + a);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
-
-            Thread.sleep(100L);
+            Thread.sleep(5000L);
         }
     }
 }
