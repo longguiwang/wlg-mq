@@ -1,9 +1,9 @@
-package com.wlg.mqproducer;
+package com.wlg.mqclient.producer;
 
 import com.alibaba.fastjson.JSON;
 import com.wlg.mqclient.entity.SendMessageResult;
 import com.wlg.mqclient.handler.ClientHandler;
-import com.wlg.mqclient.processor.ClientProcessor;
+import com.wlg.mqcommon.settings.Settings;
 import com.wlg.mqprotocol.entity.Head;
 import com.wlg.mqprotocol.entity.Request;
 import com.wlg.mqprotocol.entity.SendMessage;
@@ -45,10 +45,11 @@ public class MessageProducer {
                     .channel()
                     .writeAndFlush(encodedData);
 
-            long nanosTimeout = TimeUnit.SECONDS.toNanos(3);
+            long nanosTimeout = TimeUnit.SECONDS.toNanos(Settings.DEFAULT_TIMEOUT_IN_SECONDS);
             final long deadline = System.nanoTime() + nanosTimeout;
             ClientHandler handler = (ClientHandler) MessageProducer.channelFuture.channel().pipeline().last();
             sendMessageResult = handler.getSendMessageResult();
+            //sendMessageResult = new SendMessageResult();
             nanosTimeout = deadline - System.nanoTime();
             if(nanosTimeout<0){
                 sendMessageResult.setRespDesc("Message send timeout");

@@ -1,4 +1,4 @@
-package com.wlg.mqconsumer;
+package com.wlg.mqclient.consumer;
 
 import com.wlg.mqclient.entity.AbstractConsumer;
 import com.wlg.mqclient.manage.ConsumerManager;

@@ -28,7 +28,7 @@ public class MessageStorage {
                 return FileOperation.save(getMessageStorage(sendMessage.getTopic()),sendMessage);
             }
         } catch (IOException | InterruptedException e) {
-            log.error("save filer error",e);
+            log.error("save file error",e);
         }
         return null;
     }

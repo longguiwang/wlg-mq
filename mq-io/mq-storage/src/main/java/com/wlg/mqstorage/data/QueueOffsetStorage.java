@@ -24,7 +24,7 @@ public class QueueOffsetStorage {
         String consumerFileName = consumerDir +"/ConsumerData";
         boolean mkdirs = new File(consumerDir).mkdirs();
         if (mkdirs){
-            throw new RuntimeException("创建文件夹失败");
+            throw new RuntimeException("Create ConsumerData directory failed");
         }
         TopicConsumerData topicConsumerData = readConsumer(topic);
         if (topicConsumerData==null){

@@ -1,5 +1,6 @@
 package com.wlg.mqclient;
 
+import com.wlg.mqclient.handler.ReconnectHandler;
 import com.wlg.mqclient.initializer.ClientChannelInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -29,12 +30,14 @@ public class ClientReactor {
         EventLoopGroup eventExecutors = new NioEventLoopGroup();
 
         bootstrap.group(eventExecutors)
+                .remoteAddress(host, port)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.TCP_NODELAY,true)
                 .handler(new ClientChannelInitializer());
     }
 
     public ChannelFuture getChannelFuture() throws InterruptedException {
-        return bootstrap.connect(host, port).sync();
+        ReconnectHandler.setBootstrap(bootstrap);
+        return bootstrap.connect().sync();
     }
 }
