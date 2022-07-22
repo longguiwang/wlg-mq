@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class PullMessageTask implements Runnable{
 
     private final ConsumerMessageQueue consumerMessageQueue;
-    private final ChannelFuture channelFuture;
+    private ChannelFuture channelFuture;
     private final String consumerGroup;
     private final String topic;
 
@@ -40,7 +40,8 @@ public class PullMessageTask implements Runnable{
     public void run() {
         log.info("pull message from topic:{} ,consumer group is:{}, channelFuture is {}",this.topic,consumerMessageQueue.getConsumerGroup(),this.channelFuture);
         while (true){
-            //尚未初始化完成
+            //check if init queue is completed
+            //log.info("check if init queue is completed");
             if (!ConsumerRegister.isInit(this.topic,this.consumerGroup)){
                 try {
                     Thread.sleep(100L);
@@ -51,17 +52,12 @@ public class PullMessageTask implements Runnable{
             }
             Map<Integer, ConcurrentLinkedQueue<PullMessage>> queueMap = consumerMessageQueue.getQueueMap();
             for (Integer queueId : queueMap.keySet()) {
-                try {
-                    pull(queueId);
-                    Thread.sleep(1L);
-                } catch (InterruptedException e) {
-                    log.error(e.getLocalizedMessage());
-                }
+                pull(queueId);
             }
         }
     }
 
-    private void pull(Integer queueId) throws InterruptedException {
+    private void pull(Integer queueId) {
         EncodedData encodedData = new EncodedData();
         encodedData.setHead(Head.toHead(MessageEnum.Req));
 
@@ -84,7 +80,20 @@ public class PullMessageTask implements Runnable{
         request.setData(pull);
         request.setOperation(OperationEnum.Pull.getOperation());
         encodedData.setData(request);
-
-        channelFuture.channel().writeAndFlush(encodedData).sync();
+        //if channel is inactive, retrieve the channel again from ConsumerRegister,
+        // as it will reconnect to server to get new channel.
+        if(!channelFuture.channel().isActive()){
+            channelFuture = ConsumerRegister.getChannelFuture();
+        }
+        if(!channelFuture.channel().isActive()){
+            log.warn("Channel is not active, skip pull message");
+            return;
+        }
+        try {
+            channelFuture.channel().writeAndFlush(encodedData).sync();
+            Thread.sleep(10L);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }
